@@ -332,6 +332,8 @@ public class DefaultSAMLAssertionBuilder implements SAMLAssertionBuilder {
         }
         claims.remove(IdentityCoreConstants.MULTI_ATTRIBUTE_SEPARATOR);
 
+        String attributeNameFormat = resolveAttributeNameFormat();
+
         AttributeStatement attStmt = new AttributeStatementBuilder().buildObject();
         Iterator<Map.Entry<String, String>> iterator = claims.entrySet().iterator();
         boolean atLeastOneNotEmpty = false;
@@ -344,7 +346,7 @@ public class DefaultSAMLAssertionBuilder implements SAMLAssertionBuilder {
                 Attribute attribute = new AttributeBuilder().buildObject();
                 attribute.setName(claimUri);
                 //setting NAMEFORMAT attribute value to basic attribute profile
-                attribute.setNameFormat(SAMLSSOConstants.NAME_FORMAT_BASIC);
+                attribute.setNameFormat(attributeNameFormat);
                 // look
                 // https://wiki.shibboleth.net/confluence/display/OpenSAML/OSTwoUsrManJavaAnyTypes
                 XSStringBuilder stringBuilder = (XSStringBuilder) Configuration.getBuilderFactory().
@@ -375,5 +377,16 @@ public class DefaultSAMLAssertionBuilder implements SAMLAssertionBuilder {
         } else {
             return null;
         }
+    }
+
+    private String resolveAttributeNameFormat() {
+
+        String attributeNameFormat = IdentityUtil.getProperty(SAMLSSOConstants.CONF_ATTRIBUTE_NAME_FORMAT);
+
+        if (StringUtils.isNotBlank(attributeNameFormat)) {
+            return attributeNameFormat;
+        }
+
+        return SAMLSSOConstants.NAME_FORMAT_BASIC;
     }
 }

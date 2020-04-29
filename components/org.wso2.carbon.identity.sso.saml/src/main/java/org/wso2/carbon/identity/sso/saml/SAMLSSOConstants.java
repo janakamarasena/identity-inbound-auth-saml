@@ -22,6 +22,7 @@ public class SAMLSSOConstants {
     public static final String NAME_ID_POLICY_ENTITY = "urn:oasis:names:tc:SAML:2.0:nameid-format:entity";
     public static final String SUBJECT_CONFIRM_BEARER = "urn:oasis:names:tc:SAML:2.0:cm:bearer";
     public static final String NAME_FORMAT_BASIC = "urn:oasis:names:tc:SAML:2.0:attrname-format:basic";
+    public static final String CONF_ATTRIBUTE_NAME_FORMAT = "SSOService.AttributeNameFormat";
     public static final String SAML_ASSERTION_URN = "urn:oasis:names:tc:SAML:2.0:assertion";
     public static final String NAMEID_FORMAT_PERSISTENT = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent";
     public static final String PASSWORD_PROTECTED_TRANSPORT_CLASS =
